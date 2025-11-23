@@ -99,18 +99,14 @@
       gap: 6px;
     }
 
-    .status-label span:first-child {
-      font-size: 1.3rem;
-    }
-
     .status-line {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 700;
     }
 
     .progress-bar {
       width: 100%;
-      height: 12px;
+      height: 14px;
       background: rgba(255, 255, 255, 0.7);
       border-radius: 999px;
       overflow: hidden;
@@ -125,10 +121,10 @@
       transition: width 0.3s ease-out;
     }
 
-    /* Grafisk nøglesti */
+    /* Nøgle-sti */
     .journey-box {
-      margin: 8px auto 20px;
-      max-width: 620px;
+      margin: 12px auto 22px;
+      max-width: 650px;
       padding: 10px 12px;
       border-radius: 14px;
       background: rgba(255, 253, 245, 0.96);
@@ -141,8 +137,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--text-muted);
       margin-bottom: 6px;
+      color: var(--text-muted);
     }
 
     .key-track {
@@ -153,19 +149,19 @@
     }
 
     .key-slot {
-      height: 22px;
+      height: 24px;
       border-radius: 999px;
       border: 1px solid rgba(255, 213, 79, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.9rem;
-      color: rgba(121, 85, 72, 0.7);
       background: rgba(255, 248, 225, 0.9);
+      color: rgba(121, 85, 72, 0.7);
     }
 
     .key-slot.filled {
-      background: radial-gradient(circle at top, rgba(255, 241, 118, 0.9), rgba(255, 213, 79, 0.8));
+      background: radial-gradient(circle at top, #fff59d, #ffe082);
       border-color: var(--accent-green);
       color: #5d4037;
       font-weight: 700;
@@ -189,36 +185,27 @@
       background: var(--card-bg);
       border-radius: 18px;
       padding: 12px 14px;
-      box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--card-border);
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      position: relative;
-      border: 1px solid var(--card-border);
-      overflow: hidden;
     }
 
-    .card::before {
-      content: "";
+    .key-badge {
       position: absolute;
-      inset: -40px;
-      background:
-        radial-gradient(circle at top left, rgba(255, 224, 130, 0.35), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(144, 202, 249, 0.25), transparent 60%);
-      opacity: 0.8;
-      pointer-events: none;
+      right: 10px;
+      top: 8px;
+      font-size: 1.3rem;
+      opacity: 0.15;
+      transition: 0.2s;
     }
 
-    .card > * { position: relative; z-index: 1; }
-
-    .card h2 {
-      font-size: 1.05rem;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
+    .key-badge.got-key {
+      opacity: 1;
+      transform: scale(1.1) rotate(-6deg);
     }
 
     .step-number {
@@ -232,20 +219,6 @@
       justify-content: center;
       font-weight: 700;
       font-size: 0.9rem;
-      box-shadow:
-        0 0 6px rgba(255, 204, 128, 0.9);
-    }
-
-    .card p {
-      margin: 0;
-      font-size: 0.92rem;
-      color: var(--text-muted);
-    }
-
-    .options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
     }
 
     button.option {
@@ -255,815 +228,469 @@
       font-size: 0.9rem;
       cursor: pointer;
       background: rgba(255, 248, 225, 0.9);
-      color: var(--text-main);
       border: 1px solid rgba(255, 213, 79, 0.7);
-      backdrop-filter: blur(2px);
-      transition:
-        transform 0.05s ease-out,
-        box-shadow 0.1s ease-out,
-        background 0.2s,
-        border-color 0.2s;
-    }
-
-    button.option:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 8px rgba(255, 213, 79, 0.8);
-      border-color: var(--accent-neon);
-      background: rgba(255, 236, 179, 1);
+      transition: 0.2s;
     }
 
     button.option.correct {
-      background: rgba(200, 230, 201, 0.9);
+      background: #c8e6c9;
       border-color: var(--accent-green);
-      box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
     }
 
     button.option.wrong {
-      background: rgba(255, 205, 210, 0.9);
+      background: #ffcdd2;
       border-color: var(--danger);
-      box-shadow: 0 0 8px rgba(244, 67, 54, 0.7);
-    }
-
-    .card input[type="text"],
-    .card input[type="number"] {
-      width: 100%;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(188, 170, 164, 0.8);
-      font-size: 0.95rem;
-      outline: none;
-      background: rgba(255, 253, 245, 0.95);
-      color: var(--text-main);
-    }
-
-    .card input::placeholder {
-      color: rgba(161, 136, 127, 0.7);
-    }
-
-    .card input[type="text"]:focus,
-    .card input[type="number"]:focus {
-      box-shadow: 0 0 0 2px rgba(255, 213, 79, 0.8);
-      border-color: var(--accent-neon);
     }
 
     .check-btn {
-      margin-top: 4px;
-      align-self: flex-start;
-      border-radius: 999px;
-      border: none;
-      padding: 6px 12px;
-      font-size: 0.9rem;
-      cursor: pointer;
       background: radial-gradient(circle at top, var(--accent-neon), var(--accent));
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 700;
+      cursor: pointer;
       color: #4a2500;
-      font-weight: 600;
-      box-shadow:
-        0 4px 10px rgba(255, 183, 77, 0.9);
-      transition:
-        transform 0.05s ease-out,
-        box-shadow 0.1s ease-out,
-        filter 0.1s ease-out;
     }
 
-    .check-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-      box-shadow:
-        0 6px 14px rgba(255, 179, 0, 1);
+    input {
+      width: 100%;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #d7ccc8;
+      font-size: 0.95rem;
     }
 
     .feedback {
-      font-size: 0.87rem;
-      min-height: 1.2em;
-      margin-top: 2px;
-    }
-
-    .feedback.good {
-      color: var(--accent-green);
-      text-shadow: 0 0 5px rgba(200, 230, 201, 0.9);
-    }
-
-    .feedback.bad {
-      color: var(--danger);
-      text-shadow: 0 0 5px rgba(255, 205, 210, 0.9);
-    }
-
-    .key-badge {
-      position: absolute;
-      right: 10px;
-      top: 8px;
-      font-size: 1.3rem;
-      opacity: 0.15;
-      transition: opacity 0.2s, transform 0.2s;
-      filter: drop-shadow(0 0 4px rgba(255, 235, 59, 0.9));
-    }
-
-    .key-badge.got-key {
-      opacity: 1;
-      transform: scale(1.1) rotate(-5deg);
-    }
-
-    /* Skatte-kiste + kort */
-    .treasure {
-      text-align: center;
-      padding: 18px 12px 20px;
-    }
-
-    .treasure-chest {
-      display: none;
-      margin: 0 auto 12px;
-      width: 220px;
-      height: 160px;
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(#a5661f, #6d3b09);
-      box-shadow:
-        0 0 20px rgba(0, 0, 0, 0.4),
-        0 0 28px rgba(255, 213, 79, 0.8);
-      border: 3px solid #fbc02d;
-    }
-
-    .treasure-chest::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255, 249, 196, 0.7), transparent 55%);
-      opacity: 0.9;
-    }
-
-    .treasure-band {
-      position: absolute;
-      inset: 48% 0 48% 0;
-      background: #fbc02d;
-    }
-
-    .treasure-lock {
-      position: absolute;
-      width: 32px;
-      height: 40px;
-      background: #fff59d;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .treasure-lock::before {
-      content: "";
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 4px solid #f9a825;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-      left: 50%;
-      top: -12px;
-      transform: translateX(-50%) rotate(-45deg);
-    }
-
-    .treasure-glow {
-      display: none;
-      margin-top: 8px;
-      font-size: 1.4rem;
-      text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.9),
-        0 0 20px rgba(255, 241, 118, 0.9),
-        0 0 30px rgba(255, 213, 79, 0.9);
-    }
-
-    .treasure-message {
-      display: none;
-      margin-top: 10px;
-      padding: 14px 18px;
-      background: radial-gradient(circle at top, rgba(255, 249, 196, 0.9), rgba(255, 253, 245, 0.98));
-      border-radius: 18px;
-      box-shadow:
-        0 0 20px rgba(0, 0, 0, 0.16),
-        0 0 24px rgba(255, 213, 79, 0.7);
-      font-size: 0.98rem;
-      border: 1px solid rgba(255, 213, 79, 0.9);
-    }
-
-    .treasure-message strong {
-      font-size: 1.1rem;
-      display: inline-block;
-      margin-bottom: 4px;
-    }
-
-    /* Lejligheds-kortet */
-    .flat-section {
-      max-width: 700px;
-      margin: 6px auto 0;
-      text-align: left;
-    }
-
-    .flat-section h2 {
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-
-    .flat-section p {
       font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-top: 0;
-      margin-bottom: 8px;
+      min-height: 20px;
     }
 
-    .flat-wrapper {
-      position: relative;
-      border-radius: 18px;
-      background: rgba(255, 253, 245, 0.96);
-      border: 1px solid rgba(255, 213, 79, 0.8);
-      box-shadow:
-        0 4px 18px rgba(0, 0, 0, 0.12);
-      padding: 10px;
-      overflow: hidden;
-    }
-
-    .flat-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 2fr;
-      grid-template-rows: 1fr 0.6fr 1fr;
-      gap: 4px;
-      height: 200px;
-    }
-
-    .room {
-      border-radius: 8px;
-      border: 1px solid rgba(188, 170, 164, 0.7);
-      font-size: 0.8rem;
-      padding: 4px 6px;
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      color: var(--text-main);
-      background: radial-gradient(circle at top, rgba(255, 243, 224, 0.9), rgba(255, 224, 178, 0.7));
-    }
-
-    .room span.label { z-index: 1; }
-
-    .room-kids   { grid-column: 1 / 2; grid-row: 1 / 3; }
-    .room-living { grid-column: 1 / 2; grid-row: 3 / 4; }
-    .room-hall   { grid-column: 2 / 3; grid-row: 1 / 4; }
-    .room-kitchen{ grid-column: 3 / 4; grid-row: 1 / 2; }
-    .room-wc     { grid-column: 3 / 4; grid-row: 2 / 3; }
-    .room-mom    { grid-column: 3 / 4; grid-row: 3 / 4; }
-
-    .flat-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255, 249, 196, 0.95), rgba(255, 236, 179, 0.96));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      backdrop-filter: blur(1px);
-      z-index: 5;
-    }
-
-    .flat-overlay span {
-      display: block;
-      margin-top: 4px;
-      font-size: 0.8rem;
-    }
-
-    .treasure-icon {
-      position: absolute;
-      right: 6px;
-      bottom: 4px;
-      font-size: 0.95rem;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-      text-shadow:
-        0 0 8px rgba(255, 241, 118, 0.9),
-        0 0 16px rgba(255, 213, 79, 0.9);
-    }
-
-    .treasure-icon.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .feedback.good { color: var(--accent-green); }
+    .feedback.bad { color: var(--danger); }
 
     .small {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 6px;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.7rem; }
-      .card { padding: 10px 10px; }
-      .status-box { padding-inline: 10px; }
-      .flat-grid { height: 180px; }
+    /* Skattekiste */
+    .treasure-chest {
+      width: 220px;
+      height: 160px;
+      margin: 0 auto;
+      background: linear-gradient(#a5661f, #6d3b09);
+      border-radius: 16px;
+      border: 3px solid #fbc02d;
+      display: none;
     }
+
+    .treasure-glow {
+      font-size: 1.4rem;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .treasure-message {
+      display: none;
+      background: #fff9c4;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid #ffd740;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <h1>🏴‍☠️ Elias' Skattejagt 🏴‍☠️</h1>
-      <p>Løs de sjove opgaver, saml nøglerne 🔑 og find den hemmelige skat!</p>
-    </header>
+<div class="page">
 
-    <!-- Nøgle-status -->
-    <div class="status-box">
-      <div class="status-top">
-        <div class="status-label">
-          <span>🔑</span>
-          <span>Nøgler fundet</span>
-        </div>
-        <div class="status-line" id="keyCountText">0 / 20</div>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </div>
+<header>
+  <h1>🏴‍☠️ Elias' Skattejagt 🏴‍☠️</h1>
+  <p>Løs sjove opgaver, saml nøglerne og find skatten! 💰</p>
+</header>
 
-    <!-- Grafisk nøgle-sti -->
-    <div class="journey-box">
-      <div class="journey-label">
-        <span>Din vej mod skattekisten</span>
-        <span id="journeyPercent">0%</span>
-      </div>
-      <div class="key-track" id="keyTrack">
-        <div class="key-slot">1</div>
-        <div class="key-slot">2</div>
-        <div class="key-slot">3</div>
-        <div class="key-slot">4</div>
-        <div class="key-slot">5</div>
-        <div class="key-slot">6</div>
-        <div class="key-slot">7</div>
-        <div class="key-slot">8</div>
-        <div class="key-slot">9</div>
-        <div class="key-slot">10</div>
-        <div class="key-slot">11</div>
-        <div class="key-slot">12</div>
-        <div class="key-slot">13</div>
-        <div class="key-slot">14</div>
-        <div class="key-slot">15</div>
-        <div class="key-slot">16</div>
-        <div class="key-slot">17</div>
-        <div class="key-slot">18</div>
-        <div class="key-slot">19</div>
-        <div class="key-slot">20</div>
-      </div>
-      <div class="journey-text" id="journeyText">
-        Du er lige startet – saml nøgler for at komme tættere på skattekisten!
-      </div>
-    </div>
-
-    <!-- ALLE SPØRGSMÅL -->
-    <section class="questions">
-      <!-- 1 -->
-      <article class="card" data-id="q1">
-        <div class="key-badge" id="key-q1">🔑</div>
-        <h2><span class="step-number">1</span> Hvad er mors nummerplade?</h2>
-        <p>Vælg den rigtige bilnummerplade.</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q1','forkert','db99999', this)">DB 99999</button>
-          <button class="option" onclick="checkChoice('q1','rigtig','db22179', this)">DB 22179</button>
-          <button class="option" onclick="checkChoice('q1','forkert','ab12345', this)">AB 12345</button>
-        </div>
-        <div class="feedback" id="feedback-q1"></div>
-      </article>
-
-      <!-- 2 -->
-      <article class="card" data-id="q2">
-        <div class="key-badge" id="key-q2">🔑</div>
-        <h2><span class="step-number">2</span> Hvad er Martins nummerplade?</h2>
-        <p>Kender du Martins bilnummer?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q2','forkert','eh10000', this)">EH 10000</button>
-          <button class="option" onclick="checkChoice('q2','rigtig','eh17260', this)">EH 17260</button>
-          <button class="option" onclick="checkChoice('q2','forkert','zz99999', this)">ZZ 99999</button>
-        </div>
-        <div class="feedback" id="feedback-q2"></div>
-      </article>
-
-      <!-- 3 -->
-      <article class="card" data-id="q3">
-        <div class="key-badge" id="key-q3">🔑</div>
-        <h2><span class="step-number">3</span> Hvor gammel er mor?</h2>
-        <p>Vælg det rigtige tal.</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q3','forkert','30', this)">30 år</button>
-          <button class="option" onclick="checkChoice('q3','rigtig','33', this)">33 år</button>
-          <button class="option" onclick="checkChoice('q3','forkert','100', this)">100 år (haha 😄)</button>
-        </div>
-        <div class="feedback" id="feedback-q3"></div>
-      </article>
-
-      <!-- 4 -->
-      <article class="card" data-id="q4">
-        <div class="key-badge" id="key-q4">🔑</div>
-        <h2><span class="step-number">4</span> Hvor gammel er Martin?</h2>
-        <p>Vælg det rigtige tal.</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q4','forkert','26', this)">26 år</button>
-          <button class="option" onclick="checkChoice('q4','rigtig','36', this)">36 år</button>
-          <button class="option" onclick="checkChoice('q4','forkert','136', this)">136 år (en gammel pirat! 🏴‍☠️)</button>
-        </div>
-        <div class="feedback" id="feedback-q4"></div>
-      </article>
-
-      <!-- 5 -->
-      <article class="card" data-id="q5">
-        <div class="key-badge" id="key-q5">🔑</div>
-        <h2><span class="step-number">5</span> Hvor gammel er Ella?</h2>
-        <p>Hvad er Ellas alder?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q5','forkert','8', this)">8 år</button>
-          <button class="option" onclick="checkChoice('q5','rigtig','10', this)">10 år</button>
-          <button class="option" onclick="checkChoice('q5','forkert','20', this)">20 år</button>
-        </div>
-        <div class="feedback" id="feedback-q5"></div>
-      </article>
-
-      <!-- 6 -->
-      <article class="card" data-id="q6">
-        <div class="key-badge" id="key-q6">🔑</div>
-        <h2><span class="step-number">6</span> Regnestykke: 2 + 3</h2>
-        <p>Hvad bliver 2 + 3?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q6','forkert','4', this)">4</button>
-          <button class="option" onclick="checkChoice('q6','rigtig','5', this)">5</button>
-          <button class="option" onclick="checkChoice('q6','forkert','6', this)">6</button>
-        </div>
-        <div class="feedback" id="feedback-q6"></div>
-      </article>
-
-      <!-- 7 -->
-      <article class="card" data-id="q7">
-        <div class="key-badge" id="key-q7">🔑</div>
-        <h2><span class="step-number">7</span> Regnestykke: 10 − 4</h2>
-        <p>Hvad bliver 10 minus 4?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q7','forkert','7', this)">7</button>
-          <button class="option" onclick="checkChoice('q7','rigtig','6', this)">6</button>
-          <button class="option" onclick="checkChoice('q7','forkert','4', this)">4</button>
-        </div>
-        <div class="feedback" id="feedback-q7"></div>
-      </article>
-
-      <!-- 8 -->
-      <article class="card" data-id="q8">
-        <div class="key-badge" id="key-q8">🔑</div>
-        <h2><span class="step-number">8</span> Skriv dit navn</h2>
-        <p>Kan du stave dit navn rigtigt? (Elias)</p>
-        <input type="text" id="input-q8" placeholder="Skriv dit navn her" />
-        <button class="check-btn" onclick="checkText('q8', 'elias')">Tjek svar</button>
-        <div class="feedback" id="feedback-q8"></div>
-      </article>
-
-      <!-- 9 -->
-      <article class="card" data-id="q9">
-        <div class="key-badge" id="key-q9">🔑</div>
-        <h2><span class="step-number">9</span> Din iPad-kode</h2>
-        <p>Hvad er din iPad-kode? (forælder har aftalt den med dig)</p>
-        <input type="number" id="input-q9" placeholder="Skriv koden" />
-        <button class="check-btn" onclick="checkText('q9', '11111')">Tjek kode</button>
-        <div class="feedback" id="feedback-q9"></div>
-        <div class="small">💡 Forælder: Hvis I ændrer koden senere, skal tallet her også ændres.</div>
-      </article>
-
-      <!-- 10 -->
-      <article class="card" data-id="q10">
-        <div class="key-badge" id="key-q10">🔑</div>
-        <h2><span class="step-number">10</span> En fremmed med slik</h2>
-        <p>Hvad skal du sige, hvis en fremmed spørger, om du vil have slik?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q10','forkert','ja', this)">Ja tak, jeg går med dig</button>
-          <button class="option" onclick="checkChoice('q10','rigtig','nej', this)">Nej tak, og jeg går væk</button>
-          <button class="option" onclick="checkChoice('q10','forkert','måske', this)">Måske, men kun lidt</button>
-        </div>
-        <div class="feedback" id="feedback-q10"></div>
-      </article>
-
-      <!-- 11: legeplads + løbehjul -->
-      <article class="card" data-id="q11">
-        <div class="key-badge" id="key-q11">🔑</div>
-        <h2><span class="step-number">11</span> Legeplads-mission</h2>
-        <p>
-          Lav en sej forhindringsbane på legepladsen og kør den igennem på løbehjul.
-          Når du er færdig, trykker du på knappen herunder.
-        </p>
-        <button class="check-btn" onclick="giveKeyWithoutCheck('q11')">Jeg har klaret banen!</button>
-        <div class="feedback" id="feedback-q11"></div>
-        <div class="small">
-          Hemmeligt hint til Elias: KODEN er <strong>1234</strong> 🔐
-        </div>
-      </article>
-
-      <!-- 12 -->
-      <article class="card" data-id="q12">
-        <div class="key-badge" id="key-q12">🔑</div>
-        <h2><span class="step-number">12</span> Pirat-hop</h2>
-        <p>Lav 5 store hop som en pirat-superhelt, der siger “Arrr!” hver gang 🏴‍☠️</p>
-        <button class="check-btn" onclick="giveKeyWithoutCheck('q12')">Jeg har hoppet!</button>
-        <div class="feedback" id="feedback-q12"></div>
-      </article>
-
-      <!-- 13 -->
-      <article class="card" data-id="q13">
-        <div class="key-badge" id="key-q13">🔑</div>
-        <h2><span class="step-number">13</span> Hemmelig pirat-kode</h2>
-        <p>En pirat hvisker en kode til dig… Den hemmelige kode er et tal med tre ens cifre.</p>
-        <p>(tip til far/mor: koden er 777)</p>
-        <input type="number" id="input-q13" placeholder="Skriv koden" />
-        <button class="check-btn" onclick="checkText('q13', '777')">Tjek piratkode</button>
-        <div class="feedback" id="feedback-q13"></div>
-      </article>
-
-      <!-- 14 -->
-      <article class="card" data-id="q14">
-        <div class="key-badge" id="key-q14">🔑</div>
-        <h2><span class="step-number">14</span> Bogstaver i dit navn</h2>
-        <p>Hvor mange bogstaver er der i “Elias”?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q14','forkert','3', this)">3</button>
-          <button class="option" onclick="checkChoice('q14','forkert','4', this)">4</button>
-          <button class="option" onclick="checkChoice('q14','rigtig','5', this)">5</button>
-        </div>
-        <div class="feedback" id="feedback-q14"></div>
-      </article>
-
-      <!-- 15 -->
-      <article class="card" data-id="q15">
-        <div class="key-badge" id="key-q15">🔑</div>
-        <h2><span class="step-number">15</span> Regnestykke: 3 + 4</h2>
-        <p>Hvad bliver 3 + 4? (skriv tallet)</p>
-        <input type="number" id="input-q15" placeholder="Skriv svaret" />
-        <button class="check-btn" onclick="checkText('q15', '7')">Tjek svar</button>
-        <div class="feedback" id="feedback-q15"></div>
-      </article>
-
-      <!-- 16: tænder -->
-      <article class="card" data-id="q16">
-        <div class="key-badge" id="key-q16">🔑</div>
-        <h2><span class="step-number">16</span> Tænder &amp; sengetid</h2>
-        <p>
-          Hvad skal du huske både når du går i seng om aftenen og når du står op om morgenen?
-        </p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q16','rigtig','tænder', this)">
-            Børste tænder
-          </button>
-          <button class="option" onclick="checkChoice('q16','forkert','slik', this)">
-            Spise slik i sengen
-          </button>
-          <button class="option" onclick="checkChoice('q16','forkert','ipad', this)">
-            Spille iPad hele natten
-          </button>
-        </div>
-        <div class="feedback" id="feedback-q16"></div>
-      </article>
-
-      <!-- 17: skole -->
-      <article class="card" data-id="q17">
-        <div class="key-badge" id="key-q17">🔑</div>
-        <h2><span class="step-number">17</span> Hvorfor går man i skole?</h2>
-        <p>Hvad er den bedste grund til at gå i skole?</p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q17','rigtig','lære', this)">
-            For at lære nye ting og være sammen med venner
-          </button>
-          <button class="option" onclick="checkChoice('q17','forkert','sove', this)">
-            For at sove på bordet hele dagen
-          </button>
-          <button class="option" onclick="checkChoice('q17','forkert','ipad', this)">
-            For kun at spille iPad
-          </button>
-        </div>
-        <div class="feedback" id="feedback-q17"></div>
-      </article>
-
-      <!-- 18: lytte til mor -->
-      <article class="card" data-id="q18">
-        <div class="key-badge" id="key-q18">🔑</div>
-        <h2><span class="step-number">18</span> Lytte til mor</h2>
-        <p>
-          Hvad skal du huske at gøre, når mor siger, du skal gøre noget?
-        </p>
-        <div class="options">
-          <button class="option" onclick="checkChoice('q18','rigtig','lytte', this)">
-            Lytte og prøve at gøre det
-          </button>
-          <button class="option" onclick="checkChoice('q18','forkert','ignorere', this)">
-            Lade som om du ikke hører det
-          </button>
-          <button class="option" onclick="checkChoice('q18','forkert','råbe', this)">
-            Råbe “nej!” og løbe væk
-          </button>
-        </div>
-        <div class="feedback" id="feedback-q18"></div>
-      </article>
-
-      <!-- 19: fysisk mission -->
-      <article class="card" data-id="q19">
-        <div class="key-badge" id="key-q19">🔑</div>
-        <h2><span class="step-number">19</span> Super-krop mission</h2>
-        <p>
-          Nu skal kroppen også være superhelt!<br>
-          ✔ Lav 10 englehop<br>
-          ✔ Lav 5 armbøjninger<br>
-          ✔ Drej rundt 5 gange som en fjollet pirat
-        </p>
-        <button class="check-btn" onclick="giveKeyWithoutCheck('q19')">Jeg har lavet øvelserne!</button>
-        <div class="feedback" id="feedback-q19"></div>
-      </article>
-
-      <!-- 20: svær kode kun med voksen -->
-      <article class="card" data-id="q20">
-        <div class="key-badge" id="key-q20">🔑</div>
-        <h2><span class="step-number">20</span> Hemmelig voksen-kode</h2>
-        <p>
-          Denne opgave er mest til mor eller Martin 💡<br>
-          Elias må gerne kigge med, men en voksen skal hjælpe med regnestykket.
-        </p>
-        <p>
-          Regn sammen ud:<br>
-          <strong>47 + 36 + 12 = ?</strong>
-        </p>
-        <input type="number" id="input-q20" placeholder="En voksen skriver svaret her" />
-        <button class="check-btn" onclick="checkText('q20', '95')">Godkend med koden</button>
-        <div class="feedback" id="feedback-q20"></div>
-        <div class="small">
-          Forælder: Hvis I vil have et andet “låse-tal”, kan du bare ændre regnestykket
-          og tallet <strong>95</strong> i koden.
-        </div>
-      </article>
-    </section>
-
-    <!-- SKAT + KORT -->
-    <section class="treasure">
-      <div id="treasureChest" class="treasure-chest">
-        <div class="treasure-band"></div>
-        <div class="treasure-lock"></div>
-      </div>
-      <div id="treasureGlow" class="treasure-glow">💰 SKATTEN ER ÅBEN! 💰</div>
-      <div id="treasureMessage" class="treasure-message">
-        <strong>🎉 TILLYKKE, ELIAS! 🎉</strong>
-        <p>
-          Du har samlet alle nøglerne!<br/>
-          Skatten er nu låst op – følg de voksnes hemmelige spor
-          for at finde den RIGTIGE skat i lejligheden 👀💰
-        </p>
-      </div>
-
-      <!-- Lejlighedskort -->
-      <div class="flat-section">
-        <h2>Mini-skattekort over lejligheden</h2>
-        <p>
-          Her kan du se, hvor værelserne er – og hvor skatten er gemt ved mors værelse.
-          Kortet låser først helt op, når du har alle nøgler.
-        </p>
-        <div class="flat-wrapper" id="flatWrapper">
-          <div class="flat-overlay" id="flatOverlay">
-            Skattekortet er låst…<br/>
-            <span>Saml alle 20 nøgler for at se præcis hvor skatten er!</span>
-          </div>
-          <div class="flat-grid">
-            <div class="room room-kids"><span class="label">Elias &amp; Ella værelse</span></div>
-            <div class="room room-hall"><span class="label">Gang</span></div>
-            <div class="room room-kitchen"><span class="label">Køkken</span></div>
-            <div class="room room-wc"><span class="label">WC</span></div>
-            <div class="room room-living"><span class="label">Stue</span></div>
-            <div class="room room-mom">
-              <span class="label">Mors værelse</span>
-              <span class="treasure-icon" id="treasureIcon">💰 SKAT</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- Status -->
+<div class="status-box">
+  <div class="status-top">
+    <span>🔑 Nøgler fundet</span>
+    <div id="keyCountText">0 / 20</div>
   </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
 
-  <script>
-    const totalKeys = 20;
-    const keyState = {};
+<!-- Nøgle-sti -->
+<div class="journey-box">
+  <div class="journey-label">
+    <span>Din vej mod skatten</span>
+    <span id="journeyPercent">0%</span>
+  </div>
+  <div class="key-track" id="keyTrack">
+    <div class="key-slot">1</div><div class="key-slot">2</div><div class="key-slot">3</div>
+    <div class="key-slot">4</div><div class="key-slot">5</div><div class="key-slot">6</div>
+    <div class="key-slot">7</div><div class="key-slot">8</div><div class="key-slot">9</div>
+    <div class="key-slot">10</div><div class="key-slot">11</div><div class="key-slot">12</div>
+    <div class="key-slot">13</div><div class="key-slot">14</div><div class="key-slot">15</div>
+    <div class="key-slot">16</div><div class="key-slot">17</div><div class="key-slot">18</div>
+    <div class="key-slot">19</div><div class="key-slot">20</div>
+  </div>
+  <div class="journey-text" id="journeyText">
+    Du er lige startet – saml nøgler for at finde skatten!
+  </div>
+</div>
 
-    function updateJourney(keysFound) {
-      const percent = Math.round((keysFound / totalKeys) * 100);
-      document.getElementById("journeyPercent").textContent = percent + "%";
+<!-- SPØRGSMÅL -->
+<section class="questions">
 
-      const slots = document.querySelectorAll("#keyTrack .key-slot");
-      slots.forEach((slot, index) => {
-        if (index < keysFound) {
-          slot.classList.add("filled");
-          slot.textContent = "🔑";
-        } else {
-          slot.classList.remove("filled");
-          slot.textContent = (index + 1);
-        }
-      });
+<!-- 1 -->
+<article class="card" data-id="q1">
+  <div class="key-badge" id="key-q1">🔑</div>
+  <h2><span class="step-number">1</span> Hvad er mors nummerplade?</h2>
+  <p>Vælg den rigtige bilnummerplade.</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q1','forkert','db99999', this)">DB 99999</button>
+    <button class="option" onclick="checkChoice('q1','rigtig','db22179', this)">DB 22179</button>
+    <button class="option" onclick="checkChoice('q1','forkert','ab12345', this)">AB 12345</button>
+  </div>
+  <div class="feedback" id="feedback-q1"></div>
+</article>
 
-      const textEl = document.getElementById("journeyText");
-      if (percent === 0) {
-        textEl.textContent = "Du er lige startet – saml nøgler for at komme tættere på skattekisten!";
-      } else if (percent < 40) {
-        textEl.textContent = "Du er godt i gang – fortsæt, modige pirat! 🏴‍☠️";
-      } else if (percent < 80) {
-        textEl.textContent = "Du er tæt på skatten – kun lidt flere nøgler!";
-      } else if (percent < 100) {
-        textEl.textContent = "Skatten er næsten lige foran dig! ✨";
+<!-- 2 -->
+<article class="card" data-id="q2">
+  <div class="key-badge" id="key-q2">🔑</div>
+  <h2><span class="step-number">2</span> Hvad er Martins nummerplade?</h2>
+  <p>Kender du Martins bilnummer?</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q2','forkert','eh10000', this)">EH 10000</button>
+    <button class="option" onclick="checkChoice('q2','rigtig','eh17260', this)">EH 17260</button>
+    <button class="option" onclick="checkChoice('q2','forkert','zz99999', this)">ZZ 99999</button>
+  </div>
+  <div class="feedback" id="feedback-q2"></div>
+</article>
+
+<!-- 3 -->
+<article class="card" data-id="q3">
+  <div class="key-badge" id="key-q3">🔑</div>
+  <h2><span class="step-number">3</span> Hvor gammel er mor?</h2>
+  <p>Vælg det rigtige tal.</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q3','forkert','30', this)">30 år</button>
+    <button class="option" onclick="checkChoice('q3','rigtig','33', this)">33 år</button>
+    <button class="option" onclick="checkChoice('q3','forkert','100', this)">100 år 🤣</button>
+  </div>
+  <div class="feedback" id="feedback-q3"></div>
+</article>
+
+<!-- 4 -->
+<article class="card" data-id="q4">
+  <div class="key-badge" id="key-q4">🔑</div>
+  <h2><span class="step-number">4</span> Hvor gammel er Martin?</h2>
+  <p>Vælg det rigtige tal.</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q4','forkert','26', this)">26 år</button>
+    <button class="option" onclick="checkChoice('q4','rigtig','36', this)">36 år</button>
+    <button class="option" onclick="checkChoice('q4','forkert','136', this)">136 år 🧓🤣</button>
+  </div>
+  <div class="feedback" id="feedback-q4"></div>
+</article>
+
+<!-- 5 -->
+<article class="card" data-id="q5">
+  <div class="key-badge" id="key-q5">🔑</div>
+  <h2><span class="step-number">5</span> Hvor gammel er Ella?</h2>
+  <p>Hvad er Ellas alder?</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q5','forkert','8', this)">8 år</button>
+    <button class="option" onclick="checkChoice('q5','rigtig','10', this)">10 år</button>
+    <button class="option" onclick="checkChoice('q5','forkert','20', this)">20 år</button>
+  </div>
+  <div class="feedback" id="feedback-q5"></div>
+</article>
+
+<!-- 6 -->
+<article class="card" data-id="q6">
+  <div class="key-badge" id="key-q6">🔑</div>
+  <h2><span class="step-number">6</span> 2 + 3</h2>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q6','forkert','4', this)">4</button>
+    <button class="option" onclick="checkChoice('q6','rigtig','5', this)">5</button>
+    <button class="option" onclick="checkChoice('q6','forkert','6', this)">6</button>
+  </div>
+  <div class="feedback" id="feedback-q6"></div>
+</article>
+
+<!-- 7 -->
+<article class="card" data-id="q7">
+  <div class="key-badge" id="key-q7">🔑</div>
+  <h2><span class="step-number">7</span> 10 − 4</h2>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q7','forkert','7', this)">7</button>
+    <button class="option" onclick="checkChoice('q7','rigtig','6', this)">6</button>
+    <button class="option" onclick="checkChoice('q7','forkert','4', this)">4</button>
+  </div>
+  <div class="feedback" id="feedback-q7"></div>
+</article>
+
+<!-- 8 -->
+<article class="card" data-id="q8">
+  <div class="key-badge" id="key-q8">🔑</div>
+  <h2><span class="step-number">8</span> Skriv dit navn</h2>
+  <input type="text" id="input-q8" placeholder="Skriv: Elias" />
+  <button class="check-btn" onclick="checkText('q8','elias')">Tjek svar</button>
+  <div class="feedback" id="feedback-q8"></div>
+</article>
+
+<!-- 9 -->
+<article class="card" data-id="q9">
+  <div class="key-badge" id="key-q9">🔑</div>
+  <h2><span class="step-number">9</span> Din iPad-kode</h2>
+  <input type="number" id="input-q9" placeholder="Skriv koden" />
+  <button class="check-btn" onclick="checkText('q9','11111')">Tjek kode</button>
+  <div class="feedback" id="feedback-q9"></div>
+</article>
+
+<!-- 10 -->
+<article class="card" data-id="q10">
+  <div class="key-badge" id="key-q10">🔑</div>
+  <h2><span class="step-number">10</span> En fremmed med slik</h2>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q10','forkert','ja', this)">Gå med</button>
+    <button class="option" onclick="checkChoice('q10','rigtig','nej', this)">Sige nej og gå væk</button>
+    <button class="option" onclick="checkChoice('q10','forkert','måske', this)">Måske lidt</button>
+  </div>
+  <div class="feedback" id="feedback-q10"></div>
+</article>
+
+<!-- ---------- NYE OPGAVER HER ---------- -->
+
+<!-- *** NY q11 *** -->
+<article class="card" data-id="q11">
+  <div class="key-badge" id="key-q11">🔑</div>
+  <h2><span class="step-number">11</span> Pirat-morgenmission</h2>
+  <p><strong>Hvad er den bedste rækkefølge om morgenen?</strong></p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q11','forkert','1', this)">
+      1️⃣ Spille iPad • 2️⃣ Børste tænder • 3️⃣ Tøj på
+    </button>
+    <button class="option" onclick="checkChoice('q11','rigtig','2', this)">
+      1️⃣ Tøj på • 2️⃣ Morgenmad • 3️⃣ Børste tænder
+    </button>
+    <button class="option" onclick="checkChoice('q11','forkert','3', this)">
+      1️⃣ Slik • 2️⃣ Løbe rundt • 3️⃣ Ingenting
+    </button>
+  </div>
+  <div class="feedback" id="feedback-q11"></div>
+</article>
+
+<!-- *** NY q12 *** -->
+<article class="card" data-id="q12">
+  <div class="key-badge" id="key-q12">🔑</div>
+  <h2><span class="step-number">12</span> Find noget BLÅT</h2>
+  <p>Gå rundt i lejligheden og <strong>find noget blåt</strong>.</p>
+  <p>Når du holder det i hånden, tryk på knappen:</p>
+  <button class="check-btn" onclick="giveKeyWithoutCheck('q12')">Jeg har fundet noget blåt!</button>
+  <div class="feedback" id="feedback-q12"></div>
+</article>
+
+<!-- 13 -->
+<article class="card" data-id="q13">
+  <div class="key-badge" id="key-q13">🔑</div>
+  <h2><span class="step-number">13</span> Hemmelig piratkode</h2>
+  <p>Koden er tre ens tal (tip: 777)</p>
+  <input type="number" id="input-q13" />
+  <button class="check-btn" onclick="checkText('q13','777')">Tjek kode</button>
+  <div class="feedback" id="feedback-q13"></div>
+</article>
+
+<!-- 14 -->
+<article class="card" data-id="q14">
+  <div class="key-badge" id="key-q14">🔑</div>
+  <h2><span class="step-number">14</span> Bogstaver i “Elias”</h2>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q14','forkert','3', this)">3</button>
+    <button class="option" onclick="checkChoice('q14','forkert','4', this)">4</button>
+    <button class="option" onclick="checkChoice('q14','rigtig','5', this)">5</button>
+  </div>
+  <div class="feedback" id="feedback-q14"></div>
+</article>
+
+<!-- 15 -->
+<article class="card" data-id="q15">
+  <div class="key-badge" id="key-q15">🔑</div>
+  <h2><span class="step-number">15</span> 3 + 4</h2>
+  <input type="number" id="input-q15" placeholder="Svar" />
+  <button class="check-btn" onclick="checkText('q15','7')">Tjek svar</button>
+  <div class="feedback" id="feedback-q15"></div>
+</article>
+
+<!-- 16 -->
+<article class="card" data-id="q16">
+  <div class="key-badge" id="key-q16">🔑</div>
+  <h2><span class="step-number">16</span> Tænder</h2>
+  <p>Hvad skal man huske hver morgen og aften?</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q16','rigtig','tænder', this)">Børste tænder</button>
+    <button class="option" onclick="checkChoice('q16','forkert','slik', this)">Spise slik</button>
+    <button class="option" onclick="checkChoice('q16','forkert','ipad', this)">Spille iPad</button>
+  </div>
+  <div class="feedback" id="feedback-q16"></div>
+</article>
+
+<!-- 17 -->
+<article class="card" data-id="q17">
+  <div class="key-badge" id="key-q17">🔑</div>
+  <h2><span class="step-number">17</span> Hvorfor går man i skole?</h2>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q17','rigtig','lære', this)">For at lære og lege med venner</button>
+    <button class="option" onclick="checkChoice('q17','forkert','sove', this)">For at sove</button>
+    <button class="option" onclick="checkChoice('q17','forkert','ipad', this)">Kun spille iPad</button>
+  </div>
+  <div class="feedback" id="feedback-q17"></div>
+</article>
+
+<!-- *** NY q19 *** -->
+<article class="card" data-id="q19">
+  <div class="key-badge" id="key-q19">🔑</div>
+  <h2><span class="step-number">19</span> Følelses-kompas</h2>
+  <p>Hvordan føles det når du har gjort noget du er stolt af?</p>
+  <div class="options">
+    <button class="option" onclick="checkChoice('q19','forkert','sur', this)">😡 Sur</button>
+    <button class="option" onclick="checkChoice('q19','rigtig','glad', this)">🤩 Stolt og glad</button>
+    <button class="option" onclick="checkChoice('q19','forkert','meh', this)">😐 Ligeglad</button>
+  </div>
+  <div class="feedback" id="feedback-q19"></div>
+</article>
+
+<!-- *** NY q20 *** -->
+<article class="card" data-id="q20">
+  <div class="key-badge" id="key-q20">🔑</div>
+  <h2><span class="step-number">20</span> Team-mission med en voksen</h2>
+  <p>I skal løse regnestykket som et team! 🤝</p>
+  <p><strong>47 + 36 + 12</strong></p>
+  <input type="number" id="input-q20" />
+  <button class="check-btn" onclick="checkText('q20','95')">Godkend koden</button>
+  <div class="feedback" id="feedback-q20"></div>
+</article>
+
+</section>
+
+<!-- Skat -->
+
+<div class="treasure">
+  <div id="treasureChest" class="treasure-chest"></div>
+  <div id="treasureGlow" class="treasure-glow">💰 SKATTEN ER ÅBEN! 💰</div>
+  <div id="treasureMessage" class="treasure-message">
+    <strong>🎉 TILLYKKE, ELIAS! 🎉</strong>
+    <p>Du har fundet alle nøglerne! Nu kan du finde den RIGTIGE skat i lejligheden! 💰✨</p>
+  </div>
+</div>
+
+</div>
+
+<script>
+  const totalKeys = 20;
+  const keyState = {};
+
+  function updateJourney(keysFound) {
+    const percent = Math.round((keysFound / totalKeys) * 100);
+    document.getElementById("journeyPercent").textContent = percent + "%";
+
+    const slots = document.querySelectorAll("#keyTrack .key-slot");
+    slots.forEach((slot, index) => {
+      if (index < keysFound) {
+        slot.classList.add("filled");
+        slot.textContent = "🔑";
       } else {
-        textEl.textContent = "ALLE nøgler fundet – skattekisten er låst op! 💰";
+        slot.classList.remove("filled");
+        slot.textContent = (index + 1);
       }
+    });
+
+    const textEl = document.getElementById("journeyText");
+    if (percent === 0) {
+      textEl.textContent = "Du er lige startet – find nøgler for at komme tættere på skatten!";
+    } else if (percent < 40) {
+      textEl.textContent = "Du er godt i gang – flot gået, Elias!";
+    } else if (percent < 80) {
+      textEl.textContent = "Wow! Du er over halvvejs – sejt!";
+    } else if (percent < 100) {
+      textEl.textContent = "Skatten er næsten lige foran dig! ✨";
+    } else {
+      textEl.textContent = "ALLE nøgler fundet – skattekisten er åben! 💰";
     }
+  }
 
-    function unlockFullTreasure() {
-      const chest = document.getElementById("treasureChest");
-      const glow = document.getElementById("treasureGlow");
-      const msg = document.getElementById("treasureMessage");
-      const overlay = document.getElementById("flatOverlay");
-      const icon = document.getElementById("treasureIcon");
+  function unlockFullTreasure() {
+    document.getElementById("treasureChest").style.display = "block";
+    document.getElementById("treasureGlow").style.display = "block";
+    document.getElementById("treasureMessage").style.display = "block";
+  }
 
-      if (chest) chest.style.display = "block";
-      if (glow) glow.style.display = "block";
-      if (msg) msg.style.display = "block";
-      if (overlay) overlay.style.display = "none";
-      if (icon) icon.classList.add("show");
+  function updateStatus() {
+    const keysFound = Object.values(keyState).filter(Boolean).length;
+    document.getElementById("keyCountText").textContent = keysFound + " / " + totalKeys;
+    document.getElementById("progressFill").style.width = (keysFound / totalKeys) * 100 + "%";
+
+    updateJourney(keysFound);
+    if (keysFound === totalKeys) unlockFullTreasure();
+  }
+
+  function markKey(q) {
+    if (!keyState[q]) {
+      keyState[q] = true;
+      document.getElementById("key-" + q).classList.add("got-key");
+      updateStatus();
     }
+  }
 
-    function updateStatus() {
-      const keysFound = Object.values(keyState).filter(Boolean).length;
-      document.getElementById("keyCountText").textContent = keysFound + " / " + totalKeys;
-      const percent = (keysFound / totalKeys) * 100;
-      document.getElementById("progressFill").style.width = percent + "%";
+  function resetOptionsVisual(q) {
+    const card = document.querySelector('.card[data-id="' + q + '"]');
+    if (!card) return;
+    card.querySelectorAll("button.option").forEach(btn => {
+      btn.classList.remove("correct", "wrong");
+    });
+  }
 
-      updateJourney(keysFound);
-
-      if (keysFound === totalKeys) {
-        unlockFullTreasure();
-      }
-    }
-
-    function markKey(questionId) {
-      if (!keyState[questionId]) {
-        keyState[questionId] = true;
-        const keyEl = document.getElementById("key-" + questionId);
-        if (keyEl) keyEl.classList.add("got-key");
-        updateStatus();
-      }
-    }
-
-    function resetOptionsVisual(questionId) {
-      const card = document.querySelector('.card[data-id="' + questionId + '"]');
-      if (!card) return;
-      const buttons = card.querySelectorAll("button.option");
-      buttons.forEach(btn => {
-        btn.classList.remove("correct", "wrong");
-      });
-    }
-
-    function checkChoice(questionId, type, value, buttonEl) {
-      resetOptionsVisual(questionId);
-      const fb = document.getElementById("feedback-" + questionId);
-      if (type === "rigtig") {
-        buttonEl.classList.add("correct");
-        fb.textContent = "Rigtigt! Du får en nøgle 🔑";
-        fb.className = "feedback good";
-        markKey(questionId);
-      } else {
-        buttonEl.classList.add("wrong");
-        fb.textContent = "Det var ikke helt rigtigt. Prøv igen, seje pirat!";
-        fb.className = "feedback bad";
-      }
-    }
-
-    function checkText(questionId, correctValue) {
-      const input = document.getElementById("input-" + questionId);
-      const fb = document.getElementById("feedback-" + questionId);
-      if (!input || !fb) return;
-      const value = ("" + input.value).trim().toLowerCase();
-      if (value === ("" + correctValue).toLowerCase()) {
-        fb.textContent = "Super flot! Du får en nøgle 🔑";
-        fb.className = "feedback good";
-        markKey(questionId);
-      } else {
-        fb.textContent = "Det var ikke helt rigtigt. Prøv igen!";
-        fb.className = "feedback bad";
-      }
-    }
-
-    function giveKeyWithoutCheck(questionId) {
-      const fb = document.getElementById("feedback-" + questionId);
-      fb.textContent = "Godt klaret! Du får en nøgle 🔑";
+  function checkChoice(q, type, value, btn) {
+    resetOptionsVisual(q);
+    const fb = document.getElementById("feedback-" + q);
+    if (type === "rigtig") {
+      btn.classList.add("correct");
+      fb.textContent = "Rigtigt! Du får en nøgle 🔑";
       fb.className = "feedback good";
-      markKey(questionId);
+      markKey(q);
+    } else {
+      btn.classList.add("wrong");
+      fb.textContent = "Ikke helt, prøv igen 😊";
+      fb.className = "feedback bad";
     }
+  }
 
-    // start
-    updateStatus();
-  </script>
+  function checkText(q, correct) {
+    const input = document.getElementById("input-" + q);
+    const fb = document.getElementById("feedback-" + q);
+    if (!input || !fb) return;
+    const val = ("" + input.value).trim().toLowerCase();
+    if (val === ("" + correct).toLowerCase()) {
+      fb.textContent = "Super! Du får en nøgle 🔑";
+      fb.className = "feedback good";
+      markKey(q);
+    } else {
+      fb.textContent = "Prøv igen 😊";
+      fb.className = "feedback bad";
+    }
+  }
+
+  function giveKeyWithoutCheck(q) {
+    document.getElementById("feedback-" + q).textContent = "Godt klaret! 🔑";
+    document.getElementById("feedback-" + q).className = "feedback good";
+    markKey(q);
+  }
+
+  updateStatus();
+</script>
+
 </body>
 </html>
