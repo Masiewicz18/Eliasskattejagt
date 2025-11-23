@@ -1,11 +1,22 @@
-<!DOCTYPE html>
 <html lang="da">
 <head>
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
+  <title>Elias' Mørke Skattejagt</title>
   <title>Elias' Skattejagt</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+:root {
+      --bg-main: #050008;
+      --bg-grad1: #17001f;
+      --bg-grad2: #070313;
+      --accent: #8a2be2;
+      --accent-neon: #b300ff;
+      --accent-green: #3dff7c;
+      --card-bg: rgba(12, 4, 24, 0.95);
+      --card-border: #4b1c7a;
+      --text-main: #f4e9ff;
+      --text-muted: #b1a7c7;
+      --danger: #ff4b7b;
       --bg-main: #fff8e1;
       --bg-grad1: #fffde7;
       --bg-grad2: #ffe0b2;
@@ -17,680 +28,582 @@
       --text-main: #4a2a10;
       --text-muted: #8d6e63;
       --danger: #e53935;
-    }
+}
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
+* { box-sizing: border-box; }
+@@ -25,10 +25,10 @@
+margin: 0;
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+background:
+        radial-gradient(circle at top, rgba(179, 0, 255, 0.15) 0, transparent 45%),
+        radial-gradient(circle at bottom right, rgba(0, 255, 170, 0.12) 0, transparent 50%),
+        radial-gradient(circle at bottom left, rgba(179, 0, 255, 0.18) 0, transparent 55%),
+        linear-gradient(160deg, var(--bg-grad1), var(--bg-grad2));
         radial-gradient(circle at top, rgba(144, 202, 249, 0.55) 0, transparent 50%),
         radial-gradient(circle at bottom right, rgba(255, 224, 130, 0.45) 0, transparent 55%),
         radial-gradient(circle at bottom left, rgba(255, 213, 79, 0.4) 0, transparent 55%),
         linear-gradient(180deg, var(--bg-grad1), var(--bg-grad2));
-      color: var(--text-main);
-      min-height: 100vh;
-    }
+color: var(--text-main);
+min-height: 100vh;
+}
+@@ -41,15 +41,15 @@
 
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 18px 16px 40px;
-    }
-
-    header {
-      text-align: center;
+header {
+text-align: center;
+      padding: 10px 8px 8px;
       padding: 10px 8px 12px;
-      position: relative;
-    }
+position: relative;
+}
 
-    header::after {
-      content: "";
-      position: absolute;
+header::after {
+content: "";
+position: absolute;
+      inset: auto 20% -8px;
+      height: 2px;
       inset: auto 12% -8px;
       height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
-      opacity: 0.9;
-    }
-
-    h1 {
-      font-size: 2.1rem;
-      margin: 0;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-shadow:
+background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
+opacity: 0.9;
+}
+@@ -60,8 +60,8 @@
+letter-spacing: 0.06em;
+text-transform: uppercase;
+text-shadow:
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 16px rgba(179, 0, 255, 0.8);
         0 0 4px rgba(255, 255, 255, 0.9),
         0 0 10px rgba(255, 183, 77, 0.9);
-    }
+}
 
-    header p {
-      margin-top: 6px;
-      font-size: 1rem;
-      color: var(--text-muted);
-    }
-
-    /* Status øverst */
-    .status-box {
-      margin: 16px auto 12px;
-      padding: 12px 14px;
-      border-radius: 16px;
+header p {
+@@ -75,15 +75,15 @@
+margin: 16px auto 12px;
+padding: 12px 14px;
+border-radius: 16px;
+      background: radial-gradient(circle at top left, rgba(179, 0, 255, 0.25), rgba(10, 2, 22, 0.95));
       background:
         radial-gradient(circle at top left, rgba(255, 213, 79, 0.45), rgba(255, 249, 196, 0.95));
-      box-shadow:
+box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(179, 0, 255, 0.25);
         0 5px 18px rgba(0, 0, 0, 0.14);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-width: 500px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+max-width: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 213, 79, 0.7);
-    }
+}
 
-    .status-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.95rem;
-    }
+.status-top {
+@@ -100,27 +100,28 @@
+}
 
-    .status-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+.status-label span:first-child {
+      font-size: 1.1rem;
+      font-size: 1.3rem;
+}
 
-    .status-line {
-      font-size: 1rem;
-      font-weight: 700;
-    }
+.status-line {
+font-size: 0.95rem;
+      font-weight: 600;
+}
 
-    .progress-bar {
-      width: 100%;
-      height: 14px;
+.progress-bar {
+width: 100%;
+height: 12px;
+      background: rgba(255, 255, 255, 0.06);
       background: rgba(255, 255, 255, 0.7);
-      border-radius: 999px;
-      overflow: hidden;
+border-radius: 999px;
+overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 213, 79, 0.9);
-    }
+}
 
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent-green), var(--accent-neon));
+.progress-fill {
+height: 100%;
+width: 0%;
+background: linear-gradient(90deg, var(--accent-green), var(--accent-neon));
+      box-shadow: 0 0 12px rgba(61, 255, 124, 0.7);
       box-shadow: 0 0 12px rgba(76, 175, 80, 0.7);
-      transition: width 0.3s ease-out;
-    }
+transition: width 0.3s ease-out;
+}
 
-    /* Nøgle-sti */
-    .journey-box {
-      margin: 12px auto 22px;
-      max-width: 650px;
-      padding: 10px 12px;
-      border-radius: 14px;
+@@ -130,9 +131,9 @@
+max-width: 620px;
+padding: 10px 12px;
+border-radius: 14px;
+      background: rgba(5, 0, 12, 0.9);
+      border: 1px solid rgba(179, 0, 255, 0.4);
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.9);
       background: rgba(255, 253, 245, 0.96);
       border: 1px solid rgba(255, 213, 79, 0.7);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      font-size: 0.9rem;
-    }
+font-size: 0.9rem;
+}
 
-    .journey-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-      color: var(--text-muted);
-    }
-
-    .key-track {
-      display: grid;
-      grid-template-columns: repeat(10, minmax(0, 1fr));
-      gap: 4px;
-      margin-bottom: 4px;
-    }
-
-    .key-slot {
-      height: 24px;
-      border-radius: 999px;
+@@ -154,20 +155,21 @@
+.key-slot {
+height: 22px;
+border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 213, 79, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      background: rgba(255, 248, 225, 0.9);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.02);
       color: rgba(121, 85, 72, 0.7);
-    }
+      background: rgba(255, 248, 225, 0.9);
+}
 
-    .key-slot.filled {
-      background: radial-gradient(circle at top, #fff59d, #ffe082);
-      border-color: var(--accent-green);
+.key-slot.filled {
+      background: radial-gradient(circle at top, rgba(61, 255, 124, 0.35), rgba(61, 255, 124, 0.1));
+      background: radial-gradient(circle at top, rgba(255, 241, 118, 0.9), rgba(255, 213, 79, 0.8));
+border-color: var(--accent-green);
+      color: var(--accent-green);
+      box-shadow: 0 0 10px rgba(61, 255, 124, 0.7);
       color: #5d4037;
       font-weight: 700;
       box-shadow: 0 0 10px rgba(255, 241, 118, 0.9);
-    }
+}
 
-    .journey-text {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+.journey-text {
+@@ -188,8 +190,7 @@
+border-radius: 18px;
+padding: 12px 14px;
+box-shadow:
+        0 0 16px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(0, 0, 0, 0.8);
+        0 6px 16px rgba(0, 0, 0, 0.12);
+display: flex;
+flex-direction: column;
+gap: 8px;
+@@ -203,8 +204,8 @@
+position: absolute;
+inset: -40px;
+background:
+        radial-gradient(circle at top left, rgba(179, 0, 255, 0.15), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(61, 255, 124, 0.07), transparent 60%);
+        radial-gradient(circle at top left, rgba(255, 224, 130, 0.35), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(144, 202, 249, 0.25), transparent 60%);
+opacity: 0.8;
+pointer-events: none;
+}
+@@ -217,12 +218,12 @@
+display: flex;
+align-items: center;
+gap: 6px;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
+}
 
-    /* Spørgsmålskort */
-    .questions {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 12px 14px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-      border: 1px solid var(--card-border);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .key-badge {
-      position: absolute;
-      right: 10px;
-      top: 8px;
-      font-size: 1.3rem;
-      opacity: 0.15;
-      transition: 0.2s;
-    }
-
-    .key-badge.got-key {
-      opacity: 1;
-      transform: scale(1.1) rotate(-6deg);
-    }
-
-    .step-number {
-      background: radial-gradient(circle at top, var(--accent-neon), var(--accent));
+.step-number {
+background: radial-gradient(circle at top, var(--accent-neon), var(--accent));
+      color: #050008;
       color: #4a2500;
-      border-radius: 999px;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
+border-radius: 999px;
+width: 26px;
+height: 26px;
+@@ -232,8 +233,7 @@
+font-weight: 700;
+font-size: 0.9rem;
+box-shadow:
+        0 0 6px rgba(179, 0, 255, 0.9),
+        0 0 14px rgba(0, 0, 0, 0.8);
+        0 0 6px rgba(255, 204, 128, 0.9);
+}
 
-    button.option {
-      border: none;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 0.9rem;
-      cursor: pointer;
+.card p {
+@@ -254,10 +254,10 @@
+padding: 6px 10px;
+font-size: 0.9rem;
+cursor: pointer;
+      background: rgba(255, 255, 255, 0.03);
       background: rgba(255, 248, 225, 0.9);
+color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(3px);
       border: 1px solid rgba(255, 213, 79, 0.7);
-      transition: 0.2s;
-    }
+      backdrop-filter: blur(2px);
+transition:
+transform 0.05s ease-out,
+box-shadow 0.1s ease-out,
+@@ -267,42 +267,42 @@
 
-    button.option.correct {
-      background: #c8e6c9;
-      border-color: var(--accent-green);
-    }
+button.option:hover {
+transform: translateY(-1px);
+      box-shadow: 0 0 10px rgba(179, 0, 255, 0.7);
+      box-shadow: 0 0 8px rgba(255, 213, 79, 0.8);
+border-color: var(--accent-neon);
+      background: rgba(179, 0, 255, 0.16);
+      background: rgba(255, 236, 179, 1);
+}
 
-    button.option.wrong {
-      background: #ffcdd2;
-      border-color: var(--danger);
-    }
+button.option.correct {
+      background: rgba(61, 255, 124, 0.20);
+      background: rgba(200, 230, 201, 0.9);
+border-color: var(--accent-green);
+      box-shadow: 0 0 12px rgba(61, 255, 124, 0.9);
+      box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
+}
 
-    .check-btn {
-      background: radial-gradient(circle at top, var(--accent-neon), var(--accent));
-      border: none;
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-weight: 700;
-      cursor: pointer;
+button.option.wrong {
+      background: rgba(255, 75, 123, 0.18);
+      background: rgba(255, 205, 210, 0.9);
+border-color: var(--danger);
+      box-shadow: 0 0 10px rgba(255, 75, 123, 0.7);
+      box-shadow: 0 0 8px rgba(244, 67, 54, 0.7);
+}
+
+.card input[type="text"],
+.card input[type="number"] {
+width: 100%;
+padding: 7px 10px;
+border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(188, 170, 164, 0.8);
+font-size: 0.95rem;
+outline: none;
+      background: rgba(0, 0, 0, 0.5);
+      background: rgba(255, 253, 245, 0.95);
+color: var(--text-main);
+}
+
+.card input::placeholder {
+      color: rgba(199, 186, 232, 0.5);
+      color: rgba(161, 136, 127, 0.7);
+}
+
+.card input[type="text"]:focus,
+.card input[type="number"]:focus {
+      box-shadow: 0 0 0 2px rgba(179, 0, 255, 0.35);
+      box-shadow: 0 0 0 2px rgba(255, 213, 79, 0.8);
+border-color: var(--accent-neon);
+}
+
+@@ -315,11 +315,10 @@
+font-size: 0.9rem;
+cursor: pointer;
+background: radial-gradient(circle at top, var(--accent-neon), var(--accent));
+      color: #050008;
       color: #4a2500;
-    }
+font-weight: 600;
+box-shadow:
+        0 0 10px rgba(179, 0, 255, 0.8),
+        0 0 18px rgba(0, 0, 0, 0.9);
+        0 4px 10px rgba(255, 183, 77, 0.9);
+transition:
+transform 0.05s ease-out,
+box-shadow 0.1s ease-out,
+@@ -328,10 +327,9 @@
 
-    input {
-      width: 100%;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid #d7ccc8;
-      font-size: 0.95rem;
-    }
+.check-btn:hover {
+transform: translateY(-1px);
+      filter: brightness(1.1);
+      filter: brightness(1.05);
+box-shadow:
+        0 0 12px rgba(179, 0, 255, 1),
+        0 0 22px rgba(0, 0, 0, 0.95);
+        0 6px 14px rgba(255, 179, 0, 1);
+}
 
-    .feedback {
-      font-size: 0.9rem;
-      min-height: 20px;
-    }
+.feedback {
+@@ -342,12 +340,12 @@
 
-    .feedback.good { color: var(--accent-green); }
-    .feedback.bad { color: var(--danger); }
+.feedback.good {
+color: var(--accent-green);
+      text-shadow: 0 0 8px rgba(61, 255, 124, 0.7);
+      text-shadow: 0 0 5px rgba(200, 230, 201, 0.9);
+}
 
-    .small {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+.feedback.bad {
+color: var(--danger);
+      text-shadow: 0 0 8px rgba(255, 75, 123, 0.6);
+      text-shadow: 0 0 5px rgba(255, 205, 210, 0.9);
+}
 
-    /* Skattekiste */
-    .treasure-chest {
-      width: 220px;
-      height: 160px;
-      margin: 0 auto;
+.key-badge {
+@@ -357,7 +355,7 @@
+font-size: 1.3rem;
+opacity: 0.15;
+transition: opacity 0.2s, transform 0.2s;
+      filter: drop-shadow(0 0 8px rgba(61, 255, 124, 0.7));
+      filter: drop-shadow(0 0 4px rgba(255, 235, 59, 0.9));
+}
+
+.key-badge.got-key {
+@@ -379,37 +377,37 @@
+border-radius: 16px;
+position: relative;
+overflow: hidden;
+      background: linear-gradient(#5b3508, #301a04);
       background: linear-gradient(#a5661f, #6d3b09);
-      border-radius: 16px;
+box-shadow:
+        0 0 20px rgba(0, 0, 0, 1),
+        0 0 28px rgba(61, 255, 124, 0.6);
+      border: 2px solid #d69c36;
+        0 0 20px rgba(0, 0, 0, 0.4),
+        0 0 28px rgba(255, 213, 79, 0.8);
       border: 3px solid #fbc02d;
-      display: none;
-    }
+}
 
-    .treasure-glow {
-      font-size: 1.4rem;
-      display: none;
-      margin-top: 10px;
-    }
+.treasure-chest::before {
+content: "";
+position: absolute;
+inset: 0;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.18), transparent 55%);
+      opacity: 0.8;
+      background: radial-gradient(circle at top, rgba(255, 249, 196, 0.7), transparent 55%);
+      opacity: 0.9;
+}
 
-    .treasure-message {
-      display: none;
-      background: #fff9c4;
-      border-radius: 16px;
-      padding: 16px;
-      border: 1px solid #ffd740;
-      margin-top: 10px;
-    }
+.treasure-band {
+position: absolute;
+inset: 48% 0 48% 0;
+      background: #d69c36;
+      background: #fbc02d;
+}
 
-  </style>
-</head>
+.treasure-lock {
+position: absolute;
+width: 32px;
+height: 40px;
+      background: #f4d57a;
+      background: #fff59d;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
+.treasure-lock::before {
+@@ -418,7 +416,7 @@
+width: 18px;
+height: 18px;
+border-radius: 50%;
+      border: 4px solid #c58b2b;
+      border: 4px solid #f9a825;
+border-bottom-color: transparent;
+border-left-color: transparent;
+left: 50%;
+@@ -432,21 +430,21 @@
+font-size: 1.4rem;
+text-shadow:
+0 0 10px rgba(255, 255, 255, 0.9),
+        0 0 20px rgba(61, 255, 124, 0.8),
+        0 0 30px rgba(179, 0, 255, 0.8);
+        0 0 20px rgba(255, 241, 118, 0.9),
+        0 0 30px rgba(255, 213, 79, 0.9);
+}
+
+.treasure-message {
+display: none;
+margin-top: 10px;
+padding: 14px 18px;
+      background: radial-gradient(circle at top, rgba(61, 255, 124, 0.22), rgba(10, 2, 22, 0.98));
+      background: radial-gradient(circle at top, rgba(255, 249, 196, 0.9), rgba(255, 253, 245, 0.98));
+border-radius: 18px;
+box-shadow:
+        0 0 20px rgba(0, 0, 0, 1),
+        0 0 28px rgba(61, 255, 124, 0.6);
+        0 0 20px rgba(0, 0, 0, 0.16),
+        0 0 24px rgba(255, 213, 79, 0.7);
+font-size: 0.98rem;
+      border: 1px solid rgba(61, 255, 124, 0.7);
+      border: 1px solid rgba(255, 213, 79, 0.9);
+}
+
+.treasure-message strong {
+@@ -477,11 +475,10 @@
+.flat-wrapper {
+position: relative;
+border-radius: 18px;
+      background: rgba(8, 2, 20, 0.95);
+      border: 1px solid rgba(179, 0, 255, 0.5);
+      background: rgba(255, 253, 245, 0.96);
+      border: 1px solid rgba(255, 213, 79, 0.8);
+box-shadow:
+        0 0 18px rgba(0, 0, 0, 0.9),
+        0 0 22px rgba(179, 0, 255, 0.25);
+        0 4px 18px rgba(0, 0, 0, 0.12);
+padding: 10px;
+overflow: hidden;
+}
+@@ -496,15 +493,15 @@
+
+.room {
+border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(188, 170, 164, 0.7);
+font-size: 0.8rem;
+padding: 4px 6px;
+position: relative;
+display: flex;
+align-items: flex-start;
+justify-content: flex-start;
+color: var(--text-main);
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.8));
+      background: radial-gradient(circle at top, rgba(255, 243, 224, 0.9), rgba(255, 224, 178, 0.7));
+}
+
+.room span.label { z-index: 1; }
+@@ -519,7 +516,7 @@
+.flat-overlay {
+position: absolute;
+inset: 0;
+      background: radial-gradient(circle at top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95));
+      background: radial-gradient(circle at top, rgba(255, 249, 196, 0.95), rgba(255, 236, 179, 0.96));
+display: flex;
+flex-direction: column;
+align-items: center;
+@@ -528,7 +525,7 @@
+padding: 10px;
+font-size: 0.9rem;
+color: var(--text-muted);
+      backdrop-filter: blur(2px);
+      backdrop-filter: blur(1px);
+z-index: 5;
+}
+
+@@ -547,8 +544,8 @@
+transform: translateY(4px);
+transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.9),
+        0 0 16px rgba(61, 255, 124, 0.9);
+        0 0 8px rgba(255, 241, 118, 0.9),
+        0 0 16px rgba(255, 213, 79, 0.9);
+}
+
+.treasure-icon.show {
+@@ -573,8 +570,8 @@
 <body>
 <div class="page">
-
 <header>
-  <h1>🏴‍☠️ Elias' Skattejagt 🏴‍☠️</h1>
-  <p>Løs sjove opgaver, saml nøglerne og find skatten! 💰</p>
+      <h1>🕷️ Elias' Mørke Skattejagt 🕷️</h1>
+      <p>Løs de uhyggeligt sjove opgaver, saml nøglerne 🔑 og find skatten!</p>
+      <h1>🏴‍☠️ Elias' Skattejagt 🏴‍☠️</h1>
+      <p>Løs de sjove opgaver, saml nøglerne 🔑 og find den hemmelige skat!</p>
 </header>
 
-<!-- Status -->
-<div class="status-box">
-  <div class="status-top">
-    <span>🔑 Nøgler fundet</span>
-    <div id="keyCountText">0 / 20</div>
-  </div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-</div>
-
-<!-- Nøgle-sti -->
+<!-- Nøgle-status -->
+@@ -594,7 +591,7 @@ <h1>🕷️ Elias' Mørke Skattejagt 🕷️</h1>
+<!-- Grafisk nøgle-sti -->
 <div class="journey-box">
-  <div class="journey-label">
-    <span>Din vej mod skatten</span>
-    <span id="journeyPercent">0%</span>
-  </div>
-  <div class="key-track" id="keyTrack">
-    <div class="key-slot">1</div><div class="key-slot">2</div><div class="key-slot">3</div>
-    <div class="key-slot">4</div><div class="key-slot">5</div><div class="key-slot">6</div>
-    <div class="key-slot">7</div><div class="key-slot">8</div><div class="key-slot">9</div>
-    <div class="key-slot">10</div><div class="key-slot">11</div><div class="key-slot">12</div>
-    <div class="key-slot">13</div><div class="key-slot">14</div><div class="key-slot">15</div>
-    <div class="key-slot">16</div><div class="key-slot">17</div><div class="key-slot">18</div>
-    <div class="key-slot">19</div><div class="key-slot">20</div>
-  </div>
-  <div class="journey-text" id="journeyText">
-    Du er lige startet – saml nøgler for at finde skatten!
-  </div>
+<div class="journey-label">
+        <span>Din vej mod skatten</span>
+        <span>Din vej mod skattekisten</span>
+<span id="journeyPercent">0%</span>
+</div>
+<div class="key-track" id="keyTrack">
+@@ -620,7 +617,7 @@ <h1>🕷️ Elias' Mørke Skattejagt 🕷️</h1>
+<div class="key-slot">20</div>
+</div>
+<div class="journey-text" id="journeyText">
+        Du er lige startet – saml nøgler for at komme tættere på skatten!
+        Du er lige startet – saml nøgler for at komme tættere på skattekisten!
+</div>
 </div>
 
-<!-- SPØRGSMÅL -->
-<section class="questions">
-
-<!-- 1 -->
-<article class="card" data-id="q1">
-  <div class="key-badge" id="key-q1">🔑</div>
-  <h2><span class="step-number">1</span> Hvad er mors nummerplade?</h2>
-  <p>Vælg den rigtige bilnummerplade.</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q1','forkert','db99999', this)">DB 99999</button>
-    <button class="option" onclick="checkChoice('q1','rigtig','db22179', this)">DB 22179</button>
-    <button class="option" onclick="checkChoice('q1','forkert','ab12345', this)">AB 12345</button>
-  </div>
-  <div class="feedback" id="feedback-q1"></div>
+@@ -673,7 +670,7 @@ <h2><span class="step-number">4</span> Hvor gammel er Martin?</h2>
+<div class="options">
+<button class="option" onclick="checkChoice('q4','forkert','26', this)">26 år</button>
+<button class="option" onclick="checkChoice('q4','rigtig','36', this)">36 år</button>
+          <button class="option" onclick="checkChoice('q4','forkert','136', this)">136 år (en gammel symbiote-pirat! 🕷️)</button>
+          <button class="option" onclick="checkChoice('q4','forkert','136', this)">136 år (en gammel pirat! 🏴‍☠️)</button>
+</div>
+<div class="feedback" id="feedback-q4"></div>
 </article>
-
-<!-- 2 -->
-<article class="card" data-id="q2">
-  <div class="key-badge" id="key-q2">🔑</div>
-  <h2><span class="step-number">2</span> Hvad er Martins nummerplade?</h2>
-  <p>Kender du Martins bilnummer?</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q2','forkert','eh10000', this)">EH 10000</button>
-    <button class="option" onclick="checkChoice('q2','rigtig','eh17260', this)">EH 17260</button>
-    <button class="option" onclick="checkChoice('q2','forkert','zz99999', this)">ZZ 99999</button>
-  </div>
-  <div class="feedback" id="feedback-q2"></div>
-</article>
-
-<!-- 3 -->
-<article class="card" data-id="q3">
-  <div class="key-badge" id="key-q3">🔑</div>
-  <h2><span class="step-number">3</span> Hvor gammel er mor?</h2>
-  <p>Vælg det rigtige tal.</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q3','forkert','30', this)">30 år</button>
-    <button class="option" onclick="checkChoice('q3','rigtig','33', this)">33 år</button>
-    <button class="option" onclick="checkChoice('q3','forkert','100', this)">100 år 🤣</button>
-  </div>
-  <div class="feedback" id="feedback-q3"></div>
-</article>
-
-<!-- 4 -->
-<article class="card" data-id="q4">
-  <div class="key-badge" id="key-q4">🔑</div>
-  <h2><span class="step-number">4</span> Hvor gammel er Martin?</h2>
-  <p>Vælg det rigtige tal.</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q4','forkert','26', this)">26 år</button>
-    <button class="option" onclick="checkChoice('q4','rigtig','36', this)">36 år</button>
-    <button class="option" onclick="checkChoice('q4','forkert','136', this)">136 år 🧓🤣</button>
-  </div>
-  <div class="feedback" id="feedback-q4"></div>
-</article>
-
-<!-- 5 -->
-<article class="card" data-id="q5">
-  <div class="key-badge" id="key-q5">🔑</div>
-  <h2><span class="step-number">5</span> Hvor gammel er Ella?</h2>
-  <p>Hvad er Ellas alder?</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q5','forkert','8', this)">8 år</button>
-    <button class="option" onclick="checkChoice('q5','rigtig','10', this)">10 år</button>
-    <button class="option" onclick="checkChoice('q5','forkert','20', this)">20 år</button>
-  </div>
-  <div class="feedback" id="feedback-q5"></div>
-</article>
-
-<!-- 6 -->
-<article class="card" data-id="q6">
-  <div class="key-badge" id="key-q6">🔑</div>
-  <h2><span class="step-number">6</span> 2 + 3</h2>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q6','forkert','4', this)">4</button>
-    <button class="option" onclick="checkChoice('q6','rigtig','5', this)">5</button>
-    <button class="option" onclick="checkChoice('q6','forkert','6', this)">6</button>
-  </div>
-  <div class="feedback" id="feedback-q6"></div>
-</article>
-
-<!-- 7 -->
-<article class="card" data-id="q7">
-  <div class="key-badge" id="key-q7">🔑</div>
-  <h2><span class="step-number">7</span> 10 − 4</h2>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q7','forkert','7', this)">7</button>
-    <button class="option" onclick="checkChoice('q7','rigtig','6', this)">6</button>
-    <button class="option" onclick="checkChoice('q7','forkert','4', this)">4</button>
-  </div>
-  <div class="feedback" id="feedback-q7"></div>
-</article>
-
-<!-- 8 -->
-<article class="card" data-id="q8">
-  <div class="key-badge" id="key-q8">🔑</div>
-  <h2><span class="step-number">8</span> Skriv dit navn</h2>
-  <input type="text" id="input-q8" placeholder="Skriv: Elias" />
-  <button class="check-btn" onclick="checkText('q8','elias')">Tjek svar</button>
-  <div class="feedback" id="feedback-q8"></div>
-</article>
-
-<!-- 9 -->
-<article class="card" data-id="q9">
-  <div class="key-badge" id="key-q9">🔑</div>
-  <h2><span class="step-number">9</span> Din iPad-kode</h2>
-  <input type="number" id="input-q9" placeholder="Skriv koden" />
-  <button class="check-btn" onclick="checkText('q9','11111')">Tjek kode</button>
-  <div class="feedback" id="feedback-q9"></div>
-</article>
-
-<!-- 10 -->
-<article class="card" data-id="q10">
-  <div class="key-badge" id="key-q10">🔑</div>
-  <h2><span class="step-number">10</span> En fremmed med slik</h2>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q10','forkert','ja', this)">Gå med</button>
-    <button class="option" onclick="checkChoice('q10','rigtig','nej', this)">Sige nej og gå væk</button>
-    <button class="option" onclick="checkChoice('q10','forkert','måske', this)">Måske lidt</button>
-  </div>
-  <div class="feedback" id="feedback-q10"></div>
-</article>
-
-<!-- ---------- NYE OPGAVER HER ---------- -->
-
-<!-- *** NY q11 *** -->
-<article class="card" data-id="q11">
-  <div class="key-badge" id="key-q11">🔑</div>
-  <h2><span class="step-number">11</span> Pirat-morgenmission</h2>
-  <p><strong>Hvad er den bedste rækkefølge om morgenen?</strong></p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q11','forkert','1', this)">
-      1️⃣ Spille iPad • 2️⃣ Børste tænder • 3️⃣ Tøj på
-    </button>
-    <button class="option" onclick="checkChoice('q11','rigtig','2', this)">
-      1️⃣ Tøj på • 2️⃣ Morgenmad • 3️⃣ Børste tænder
-    </button>
-    <button class="option" onclick="checkChoice('q11','forkert','3', this)">
-      1️⃣ Slik • 2️⃣ Løbe rundt • 3️⃣ Ingenting
-    </button>
-  </div>
-  <div class="feedback" id="feedback-q11"></div>
-</article>
-
-<!-- *** NY q12 *** -->
+@@ -769,20 +766,20 @@ <h2><span class="step-number">11</span> Legeplads-mission</h2>
+<!-- 12 -->
 <article class="card" data-id="q12">
-  <div class="key-badge" id="key-q12">🔑</div>
-  <h2><span class="step-number">12</span> Find noget BLÅT</h2>
-  <p>Gå rundt i lejligheden og <strong>find noget blåt</strong>.</p>
-  <p>Når du holder det i hånden, tryk på knappen:</p>
-  <button class="check-btn" onclick="giveKeyWithoutCheck('q12')">Jeg har fundet noget blåt!</button>
-  <div class="feedback" id="feedback-q12"></div>
+<div class="key-badge" id="key-q12">🔑</div>
+        <h2><span class="step-number">12</span> Symbiote-hop</h2>
+        <p>Lav 5 store hop som en mørk superhelt, der siger “Arrr!” eller “Grrr!” hver gang 🕷️</p>
+        <h2><span class="step-number">12</span> Pirat-hop</h2>
+        <p>Lav 5 store hop som en pirat-superhelt, der siger “Arrr!” hver gang 🏴‍☠️</p>
+<button class="check-btn" onclick="giveKeyWithoutCheck('q12')">Jeg har hoppet!</button>
+<div class="feedback" id="feedback-q12"></div>
 </article>
 
 <!-- 13 -->
 <article class="card" data-id="q13">
-  <div class="key-badge" id="key-q13">🔑</div>
-  <h2><span class="step-number">13</span> Hemmelig piratkode</h2>
-  <p>Koden er tre ens tal (tip: 777)</p>
-  <input type="number" id="input-q13" />
-  <button class="check-btn" onclick="checkText('q13','777')">Tjek kode</button>
-  <div class="feedback" id="feedback-q13"></div>
+<div class="key-badge" id="key-q13">🔑</div>
+        <h2><span class="step-number">13</span> Hemmelig Venom-kode</h2>
+        <p>En mørk stemme hvisker en kode til dig… Den hemmelige Venom-kode er et tal med tre ens cifre.</p>
+        <h2><span class="step-number">13</span> Hemmelig pirat-kode</h2>
+        <p>En pirat hvisker en kode til dig… Den hemmelige kode er et tal med tre ens cifre.</p>
+<p>(tip til far/mor: koden er 777)</p>
+<input type="number" id="input-q13" placeholder="Skriv koden" />
+        <button class="check-btn" onclick="checkText('q13', '777')">Tjek Venom-kode</button>
+        <button class="check-btn" onclick="checkText('q13', '777')">Tjek piratkode</button>
+<div class="feedback" id="feedback-q13"></div>
 </article>
 
-<!-- 14 -->
-<article class="card" data-id="q14">
-  <div class="key-badge" id="key-q14">🔑</div>
-  <h2><span class="step-number">14</span> Bogstaver i “Elias”</h2>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q14','forkert','3', this)">3</button>
-    <button class="option" onclick="checkChoice('q14','forkert','4', this)">4</button>
-    <button class="option" onclick="checkChoice('q14','rigtig','5', this)">5</button>
-  </div>
-  <div class="feedback" id="feedback-q14"></div>
+@@ -870,15 +867,15 @@ <h2><span class="step-number">18</span> Lytte til mor</h2>
+<div class="feedback" id="feedback-q18"></div>
 </article>
 
-<!-- 15 -->
-<article class="card" data-id="q15">
-  <div class="key-badge" id="key-q15">🔑</div>
-  <h2><span class="step-number">15</span> 3 + 4</h2>
-  <input type="number" id="input-q15" placeholder="Svar" />
-  <button class="check-btn" onclick="checkText('q15','7')">Tjek svar</button>
-  <div class="feedback" id="feedback-q15"></div>
-</article>
-
-<!-- 16 -->
-<article class="card" data-id="q16">
-  <div class="key-badge" id="key-q16">🔑</div>
-  <h2><span class="step-number">16</span> Tænder</h2>
-  <p>Hvad skal man huske hver morgen og aften?</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q16','rigtig','tænder', this)">Børste tænder</button>
-    <button class="option" onclick="checkChoice('q16','forkert','slik', this)">Spise slik</button>
-    <button class="option" onclick="checkChoice('q16','forkert','ipad', this)">Spille iPad</button>
-  </div>
-  <div class="feedback" id="feedback-q16"></div>
-</article>
-
-<!-- 17 -->
-<article class="card" data-id="q17">
-  <div class="key-badge" id="key-q17">🔑</div>
-  <h2><span class="step-number">17</span> Hvorfor går man i skole?</h2>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q17','rigtig','lære', this)">For at lære og lege med venner</button>
-    <button class="option" onclick="checkChoice('q17','forkert','sove', this)">For at sove</button>
-    <button class="option" onclick="checkChoice('q17','forkert','ipad', this)">Kun spille iPad</button>
-  </div>
-  <div class="feedback" id="feedback-q17"></div>
-</article>
-
-<!-- *** NY q19 *** -->
+      <!-- 19: fysisk mission med englehop, armbøjninger, dreje rundt -->
+      <!-- 19: fysisk mission -->
 <article class="card" data-id="q19">
-  <div class="key-badge" id="key-q19">🔑</div>
-  <h2><span class="step-number">19</span> Følelses-kompas</h2>
-  <p>Hvordan føles det når du har gjort noget du er stolt af?</p>
-  <div class="options">
-    <button class="option" onclick="checkChoice('q19','forkert','sur', this)">😡 Sur</button>
-    <button class="option" onclick="checkChoice('q19','rigtig','glad', this)">🤩 Stolt og glad</button>
-    <button class="option" onclick="checkChoice('q19','forkert','meh', this)">😐 Ligeglad</button>
-  </div>
-  <div class="feedback" id="feedback-q19"></div>
-</article>
+<div class="key-badge" id="key-q19">🔑</div>
+<h2><span class="step-number">19</span> Super-krop mission</h2>
+<p>
+Nu skal kroppen også være superhelt!<br>
+✔ Lav 10 englehop<br>
+✔ Lav 5 armbøjninger<br>
+          ✔ Drej rundt 5 gange som en fjollet Venom
+          ✔ Drej rundt 5 gange som en fjollet pirat
+</p>
+<button class="check-btn" onclick="giveKeyWithoutCheck('q19')">Jeg har lavet øvelserne!</button>
+<div class="feedback" id="feedback-q19"></div>
+@@ -916,7 +913,7 @@ <h2><span class="step-number">20</span> Hemmelig voksen-kode</h2>
+<div id="treasureMessage" class="treasure-message">
+<strong>🎉 TILLYKKE, ELIAS! 🎉</strong>
+<p>
+          Du har samlet alle de mørke nøgler!<br/>
+          Du har samlet alle nøglerne!<br/>
+Skatten er nu låst op – følg de voksnes hemmelige spor
+for at finde den RIGTIGE skat i lejligheden 👀💰
+</p>
+@@ -971,15 +968,15 @@ <h2>Mini-skattekort over lejligheden</h2>
 
-<!-- *** NY q20 *** -->
-<article class="card" data-id="q20">
-  <div class="key-badge" id="key-q20">🔑</div>
-  <h2><span class="step-number">20</span> Team-mission med en voksen</h2>
-  <p>I skal løse regnestykket som et team! 🤝</p>
-  <p><strong>47 + 36 + 12</strong></p>
-  <input type="number" id="input-q20" />
-  <button class="check-btn" onclick="checkText('q20','95')">Godkend koden</button>
-  <div class="feedback" id="feedback-q20"></div>
-</article>
+const textEl = document.getElementById("journeyText");
+if (percent === 0) {
+        textEl.textContent = "Du er lige startet – saml nøgler for at komme tættere på skatten!";
+        textEl.textContent = "Du er lige startet – saml nøgler for at komme tættere på skattekisten!";
+} else if (percent < 40) {
+        textEl.textContent = "Du er godt i gang – fortsæt, mørke helt!";
+        textEl.textContent = "Du er godt i gang – fortsæt, modige pirat! 🏴‍☠️";
+} else if (percent < 80) {
+textEl.textContent = "Du er tæt på skatten – kun lidt flere nøgler!";
+} else if (percent < 100) {
+        textEl.textContent = "Skatten er næsten lige foran dig! 🔥";
+        textEl.textContent = "Skatten er næsten lige foran dig! ✨";
+} else {
+        textEl.textContent = "ALLE nøgler fundet – skatten er låst op!";
+        textEl.textContent = "ALLE nøgler fundet – skattekisten er låst op! 💰";
+}
+}
 
-</section>
-
-<!-- Skat -->
-
-<div class="treasure">
-  <div id="treasureChest" class="treasure-chest"></div>
-  <div id="treasureGlow" class="treasure-glow">💰 SKATTEN ER ÅBEN! 💰</div>
-  <div id="treasureMessage" class="treasure-message">
-    <strong>🎉 TILLYKKE, ELIAS! 🎉</strong>
-    <p>Du har fundet alle nøglerne! Nu kan du finde den RIGTIGE skat i lejligheden! 💰✨</p>
-  </div>
-</div>
-
-</div>
-
-<script>
-  const totalKeys = 20;
-  const keyState = {};
-
-  function updateJourney(keysFound) {
-    const percent = Math.round((keysFound / totalKeys) * 100);
-    document.getElementById("journeyPercent").textContent = percent + "%";
-
-    const slots = document.querySelectorAll("#keyTrack .key-slot");
-    slots.forEach((slot, index) => {
-      if (index < keysFound) {
-        slot.classList.add("filled");
-        slot.textContent = "🔑";
-      } else {
-        slot.classList.remove("filled");
-        slot.textContent = (index + 1);
-      }
-    });
-
-    const textEl = document.getElementById("journeyText");
-    if (percent === 0) {
-      textEl.textContent = "Du er lige startet – find nøgler for at komme tættere på skatten!";
-    } else if (percent < 40) {
-      textEl.textContent = "Du er godt i gang – flot gået, Elias!";
-    } else if (percent < 80) {
-      textEl.textContent = "Wow! Du er over halvvejs – sejt!";
-    } else if (percent < 100) {
-      textEl.textContent = "Skatten er næsten lige foran dig! ✨";
-    } else {
-      textEl.textContent = "ALLE nøgler fundet – skattekisten er åben! 💰";
-    }
-  }
-
-  function unlockFullTreasure() {
-    document.getElementById("treasureChest").style.display = "block";
-    document.getElementById("treasureGlow").style.display = "block";
-    document.getElementById("treasureMessage").style.display = "block";
-  }
-
-  function updateStatus() {
-    const keysFound = Object.values(keyState).filter(Boolean).length;
-    document.getElementById("keyCountText").textContent = keysFound + " / " + totalKeys;
-    document.getElementById("progressFill").style.width = (keysFound / totalKeys) * 100 + "%";
-
-    updateJourney(keysFound);
-    if (keysFound === totalKeys) unlockFullTreasure();
-  }
-
-  function markKey(q) {
-    if (!keyState[q]) {
-      keyState[q] = true;
-      document.getElementById("key-" + q).classList.add("got-key");
-      updateStatus();
-    }
-  }
-
-  function resetOptionsVisual(q) {
-    const card = document.querySelector('.card[data-id="' + q + '"]');
-    if (!card) return;
-    card.querySelectorAll("button.option").forEach(btn => {
-      btn.classList.remove("correct", "wrong");
-    });
-  }
-
-  function checkChoice(q, type, value, btn) {
-    resetOptionsVisual(q);
-    const fb = document.getElementById("feedback-" + q);
-    if (type === "rigtig") {
-      btn.classList.add("correct");
-      fb.textContent = "Rigtigt! Du får en nøgle 🔑";
-      fb.className = "feedback good";
-      markKey(q);
-    } else {
-      btn.classList.add("wrong");
-      fb.textContent = "Ikke helt, prøv igen 😊";
-      fb.className = "feedback bad";
-    }
-  }
-
-  function checkText(q, correct) {
-    const input = document.getElementById("input-" + q);
-    const fb = document.getElementById("feedback-" + q);
-    if (!input || !fb) return;
-    const val = ("" + input.value).trim().toLowerCase();
-    if (val === ("" + correct).toLowerCase()) {
-      fb.textContent = "Super! Du får en nøgle 🔑";
-      fb.className = "feedback good";
-      markKey(q);
-    } else {
-      fb.textContent = "Prøv igen 😊";
-      fb.className = "feedback bad";
-    }
-  }
-
-  function giveKeyWithoutCheck(q) {
-    document.getElementById("feedback-" + q).textContent = "Godt klaret! 🔑";
-    document.getElementById("feedback-" + q).className = "feedback good";
-    markKey(q);
-  }
-
-  updateStatus();
+@@ -1038,7 +1035,7 @@ <h2>Mini-skattekort over lejligheden</h2>
+markKey(questionId);
+} else {
+buttonEl.classList.add("wrong");
+        fb.textContent = "Det var ikke helt rigtigt. Prøv igen, modig helt!";
+        fb.textContent = "Det var ikke helt rigtigt. Prøv igen, seje pirat!";
+fb.className = "feedback bad";
+}
+}
+@@ -1070,6 +1067,3 @@ <h2>Mini-skattekort over lejligheden</h2>
 </script>
-
 </body>
 </html>
+elias_moerke_skattejagt_v2(1).html
+
+elias_moerke_skattejagt_v2(1).html vises.
